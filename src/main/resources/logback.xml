@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" scanPeriod="60 seconds"
+               debug="false">
+    <property name="LOG_HOME" value="./log" />
+    <property name="appName" value="eslclient"/>
+    <property name="defaultPattern"
+              value="[%magenta(%d{HH:mm:ss.SSS})]|[%yellow(%-30.30thread)]|[%cyan(%-10.10logger{10})] - %gray(%msg%n)" />
+    <property name="filePattern"
+              value="[%d{HH:mm:ss.SSS}]|[%-5level]|[%thread]|[%logger{20}] - %msg%n" />
+
+    <appender name="stdout"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${defaultPattern}</pattern>
+        </layout>
+    </appender>
+
+    <appender name="appLogAppender"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${appName}.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}-${appName}-%i.gz</fileNamePattern>
+            <MaxHistory>365</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${filePattern}</pattern>
+        </layout>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="appLogAppender" />
+    </root>
+
+    <logger name="top.wdcc.esl" level="debug" />
+    <logger name="top.wdcc.esl.decoder.EslEventDecoder" level="error" />
+
+</configuration>
