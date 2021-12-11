@@ -3,7 +3,7 @@ package top.wdcc.freeswitch.common;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Message {
+public class EslCommand {
     public static final String COMMAND = "sendmsg";
     private final List<String> msgLines = new ArrayList<String>();
     private final boolean hasUuid;
@@ -12,7 +12,7 @@ public class Message {
      * Constructor for use with outbound socket client only.  This client mode does not need a call
      * UUID for context.
      */
-    public Message()
+    public EslCommand()
     {
         msgLines.add(COMMAND);
         hasUuid = false;
@@ -23,7 +23,7 @@ public class Message {
      *
      * @param uuid of the call to send message to (it should be in 'park' to be operated on).
      */
-    public Message( String uuid )
+    public EslCommand(String uuid )
     {
         msgLines.add( COMMAND + " " + uuid );
         hasUuid = true;

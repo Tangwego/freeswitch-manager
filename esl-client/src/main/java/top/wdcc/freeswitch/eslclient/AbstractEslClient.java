@@ -10,9 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.wdcc.freeswitch.common.*;
-import top.wdcc.freeswitch.eslclient.EslAuthenticateException;
-import top.wdcc.freeswitch.eslclient.EslConnectException;
-import top.wdcc.freeswitch.eslclient.EslListener;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -228,13 +225,13 @@ public abstract class AbstractEslClient implements EslListener {
 
     /**
      * 发送消息
-     * @param message  message to send
+     * @param eslCommand  message to send
      * @return  result
      */
-    public EslMessage sendMessage(Message message){
+    public EslMessage sendMessage(EslCommand eslCommand){
         checkSend();
         EslClientHandler handler = (EslClientHandler) this.channel.pipeline().last();
-        return handler.sendSyncMultiLineCommand(message.getMsgLines());
+        return handler.sendSyncMultiLineCommand(eslCommand.getMsgLines());
     }
 
     /**

@@ -2,10 +2,10 @@ package top.wdcc.freeswitch.eslclient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import top.wdcc.freeswitch.common.EslCommand;
 import top.wdcc.freeswitch.common.EslContentType;
 import top.wdcc.freeswitch.common.EslEvent;
 import top.wdcc.freeswitch.common.EslMessage;
-import top.wdcc.freeswitch.common.Message;
 
 import java.util.List;
 
@@ -52,7 +52,7 @@ public class EventClient extends AbstractEslClient {
     }
 
     @Override
-    public EslMessage sendMessage(Message message) {
+    public EslMessage sendMessage(EslCommand eslCommand) {
         throw new IllegalStateException("Event client cannot send message.");
     }
 
@@ -72,3 +72,4 @@ public class EventClient extends AbstractEslClient {
     }
 
 }
+

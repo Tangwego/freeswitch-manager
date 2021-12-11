@@ -147,4 +147,3 @@ public class EslEventDecoder extends ReplayingDecoder<EslEventDecoder.State> {
         return sb.toString();
     }
 }
-
