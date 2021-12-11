@@ -4,73 +4,106 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>top.wdcc</groupId>
-    <artifactId>freeswitch-esl</artifactId>
-    <version>1.0.0</version>
+    <groupId>top.wdcc.freeswitch</groupId>
+    <artifactId>freeswitch-manager</artifactId>
+    <packaging>pom</packaging>
+    <version>${revision}</version>
+    <modules>
+        <module>esl-client</module>
+        <module>freeswitch-manager-common</module>
+        <module>outbound-server</module>
+    </modules>
     <name>esl</name>
     <description>Esl Client for FreeSWITCH</description>
     <url>https://gitee.com/Tangwego/eslclient</url>
 
     <properties>
         <java.version>1.8</java.version>
+        <revision>1.0.0</revision>
+        <netty.version>4.1.65.Final</netty.version>
+        <common-lang3.version>3.12.0</common-lang3.version>
+        <slf4j.version>1.7.30</slf4j.version>
+        <logback.version>1.2.3</logback.version>
+        <jackson.version>2.9.4</jackson.version>
+        <dom4j.version>1.6.1</dom4j.version>
     </properties>
 
-    <dependencies>
-        <!-- netty -->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.65.Final</version>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>top.wdcc.freeswitch</groupId>
+                <artifactId>freeswitch-manager-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
-        <!-- 语言增强包 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-        </dependency>
+            <dependency>
+                <groupId>top.wdcc.freeswitch</groupId>
+                <artifactId>outbound-server</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
-        <!-- 日志接口 -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.30</version>
-        </dependency>
+            <dependency>
+                <groupId>top.wdcc.freeswitch</groupId>
+                <artifactId>esl-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
-        <!-- 日志实现 -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-        </dependency>
+            <!-- netty -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
 
-        <!-- jackson json工具 -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.9.4</version>
-        </dependency>
+            <!-- 语言增强包 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${common-lang3.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.4</version>
-        </dependency>
+            <!-- 日志接口 -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.9.4</version>
-        </dependency>
+            <!-- 日志实现 -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
 
-        <!-- xml 工具 -->
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
-        </dependency>
+            <!-- jackson json工具 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
 
-    </dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <!-- xml 工具 -->
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>${dom4j.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
